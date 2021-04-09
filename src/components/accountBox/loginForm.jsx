@@ -69,15 +69,25 @@ export function LoginForm(props) {
     <BoxContainer>
       <SnackBar ref={snkbr} />
       <FormContainer>
-        <Input type="email" placeholder="Email or Username" onChange={e => setEmail(e.target.value)}/>
-        <Input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)}/>
+        <Input
+          type="email"
+          placeholder="Email or Username"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </FormContainer>
-      <Marginer direction="vertical" margin={10} />
-      <MutedLink>Forget your password?</MutedLink>
-      <Marginer direction="vertical" margin="1.6em" />
-      <SubmitButton type="submit" onClick={login}>Sign in</SubmitButton>
+      <Marginer direction="vertical" margin={12} />
+      <MutedLink href="#">Forget your password?</MutedLink>
+      <Marginer direction="vertical" margin="1.5em" />
+      <SubmitButton type="submit" onClick={login}>
+        Sign in
+      </SubmitButton>
       <Marginer direction="vertical" margin="1em" />
-      <MutedLink href="#">
+      <MutedLink>
         Don't have an account?
         <BoldLink href="#" onClick={switchToSignup}>
           Sign up

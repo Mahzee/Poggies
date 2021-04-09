@@ -12,12 +12,12 @@ export const FormContainer = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 0px 2.5px rgba(15, 15, 15, 0.19);
+  box-shadow: 0px 1px 2.5px rgba(15, 15, 15, 0.19);
 `;
 
 export const MutedLink = styled.a`
   font-size: 11px;
-  color: rgba(180, 180, 180, 0.8);
+  color: rgba(172, 172, 172, 0.8);
   font-weight: 500;
   text-decoration: none;
 `;
@@ -64,6 +64,7 @@ export const SubmitButton = styled.button`
   border: none;
   border-radius: 100px 100px 100px 100px;
   cursor: pointer;
+  box-shadow: 0px 5px 10px rgba(15, 15, 15, 0.19);
   transition: all, 240ms ease-in-out;
   background: rgb(3, 0, 36);
   background: linear-gradient(
