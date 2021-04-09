@@ -51,7 +51,7 @@ export const Input = styled.input`
   &:focus {
     outline: none;
     border-bottom: 2px solid rgba(0, 115, 255, 1);
-    transition: all, 100ms ease-in-out;
+    transition: all, 114ms ease-in-out;
   }
 `;
 
