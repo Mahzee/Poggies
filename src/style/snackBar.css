@@ -20,7 +20,7 @@
 }
 @media screen and (min-width: 600px) {
   .MuiSnackbar-anchorOriginTopCenter {
-    top: 17% !important;
+    top: 7% !important;
     left: 50%;
     right: auto;
     transform: translateX(-50%);
