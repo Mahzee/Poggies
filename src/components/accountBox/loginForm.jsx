@@ -19,6 +19,7 @@ class loginForm extends React.Component {
       password: 0,
       switch: 'login'
   }
+  
   login =async() => {
     if(!this.state.email) return (this.SnackBar.openSnackbar('please enter your email address', 'error'))
     if(!this.state.password) return (this.SnackBar.openSnackbar('please enter your email password', 'error'))
