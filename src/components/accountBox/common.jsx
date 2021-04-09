@@ -37,6 +37,7 @@ export const Input = styled.input`
   border: 1px solid rgba(200, 200, 200, 0.3);
   padding: 0px 10px;
   border-bottom: 1.4px solid transparent;
+  box-shadow: 0px 0px 8px rgba(15, 15, 15, 0.19);
   transition: all 200ms ease-in-out;
   font-size: 12px;
 
@@ -64,7 +65,7 @@ export const SubmitButton = styled.button`
   border: none;
   border-radius: 100px 100px 100px 100px;
   cursor: pointer;
-  box-shadow: 0px 5px 10px rgba(15, 15, 15, 0.19);
+  box-shadow: 0px 8px 10px rgba(15, 15, 15, 0.19);
   transition: all, 240ms ease-in-out;
   background: rgb(3, 0, 36);
   background: linear-gradient(
