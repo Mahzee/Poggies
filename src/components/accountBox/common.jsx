@@ -65,13 +65,19 @@ export const SubmitButton = styled.button`
   border-radius: 100px 100px 100px 100px;
   cursor: pointer;
   transition: all, 240ms ease-in-out;
-  background: rgb(3,0,36);
+  background: rgb(3, 0, 36);
   background: linear-gradient(
     70deg,
-     rgba(97,9,121,1) 18%, 
-     rgba(0,115,255,1) 100%
-    );
+    rgba(97, 9, 121, 1) 18%,
+    rgba(0, 115, 255, 1) 100%
+  );
+
+  &:focus {
+    outline: none;
+  }
   &:hover {
     filter: brightness(1.2);
+    outline: none;
+    border: none;
   }
 `;
