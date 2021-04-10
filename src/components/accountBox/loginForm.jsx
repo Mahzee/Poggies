@@ -12,6 +12,7 @@ import {
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 import SnackBar  from "./SnackBar"; 
+import axios from "axios";
 
 export function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
@@ -26,6 +27,7 @@ export function LoginForm(props) {
   }
 
   async function login (){
+    var token = "";
     if (!email)
       return snkbr.current.openSnackbar(
         "Please enter your email address",
@@ -42,26 +44,29 @@ export function LoginForm(props) {
         "error"
       );
     if (validateEmailAddress(email) === false)
-      return this.snkbr.current.openSnackbar(
+      return snkbr.current.openSnackbar(
         "This email address is wrong",
         "error"
       );
 
-    // const res = await axios.post(_XXXXXXX, {
-    //     Usernameormail: email,
-    //     Password: password,
-    // })
-    //     .catch(e => {
-    //         console.log(e);
-    //         const message = (e.response && e.response.data && e.response.data.message) || 'somthing is wrong'
-    //         console.log()
-    //         this.SnackBar.openSnackbar(message)
-    //     });
+    const res = await axios
+      .post("http://127.0.0.1:8000/", {
+        Usernameormail: email,
+        Password: password,
+      })
+      .catch((e) => {
+        console.log(e);
+        const message =
+          (e.response && e.response.data && e.response.data.message) ||
+          "somthing is wrong";
+        console.log();
+        snkbr.current.openSnackbar(message);
+      });
 
-    // if (!res.data.success) return this.SnackBar.openSnackbar(res.data.message);
+    if (!res.data.success) return snkbr.current.openSnackbar(res.data.message);
 
-    // window.localStorage.setItem('token', token)
-    // this.SnackBar.openSnackbar(res.data.message);
+    window.localStorage.setItem('token', token)
+    snkbr.current.openSnackbar(res.data.message);
     console.log("loged in");
   }
 
@@ -71,7 +76,7 @@ export function LoginForm(props) {
       <FormContainer>
         <Input
           type="email"
-          placeholder="Email or Username"
+          placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
         />
         <Input

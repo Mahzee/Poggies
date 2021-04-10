@@ -14,16 +14,19 @@ import {
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 import SnackBar  from "./SnackBar"; 
+import axios from "axios";
 
 export function SignupForm(props) {
   const { switchToSignin } = useContext(AccountContext);
   const snkbr = useRef();
   const [password, setPassword] = useState(0);
   const [email, setEmail] = useState('');
-  const [fullName, setDFullName] = useState('');
+  const [fullName, setFullName] = useState('');
   const [confirmPassword, setConfirmPassword] = useState(0);
   
     async function signup () {
+      var token = "";
+
       if (!email)
         return snkbr.current.openSnackbar(
           "Please enter your email address",
@@ -59,24 +62,27 @@ export function SignupForm(props) {
           "This email address is wrong",
           "error"
         );
+          
+      const res = await axios
+        .post("http://127.0.0.1:8000/", {
+          Username: fullName,
+          Email: email,
+          Password: password,
+          Confirmpassword: confirmPassword,
+        })
+        .catch((e) => {
+          console.log(e);
+          const message =
+            (e.response && e.response.data && e.response.data.message) ||
+            "somthing is wrong";
+          console.log();
+          snkbr.current.openSnackbar(message);
+        });
 
-      // const res = await axios.post(_XXXXXXX, {
-      //     Username: fullName,
-      //     Email: email,
-      //     Password: password,
-      //     Confirmpassword: confirmPassword,
-      // })
-      //     .catch(e => {
-      //         console.log(e);
-      //         const message = (e.response && e.response.data && e.response.data.message) || 'somthing is wrong'
-      //         console.log()
-      //         this.SnackBar.openSnackbar(message)
-      //     });
+      if (!res.data.success) return snkbr.current.openSnackbar(res.data.message);
 
-      // if (!res.data.success) return this.SnackBar.openSnackbar(res.data.message);
-
-      // window.localStorage.setItem('token', token)
-      // this.SnackBar.openSnackbar(res.data.message);
+      window.localStorage.setItem('token', token)
+      snkbr.current.openSnackbar(res.data.message);
       console.log("signed up");
     }
 
@@ -90,7 +96,7 @@ export function SignupForm(props) {
       <BoxContainer>
         <SnackBar ref={snkbr} />
        <FormContainer>
-         <Input type="text" placeholder="Full Name" onChange={e => setDFullName(e.target.value)}/>
+         <Input type="text" placeholder="Full Name" onChange={e => setFullName(e.target.value)}/>
          <Input type="email" placeholder="Email" onChange={e => setEmail(e.target.value)}/>
          <Input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)}/>
          <Input type="password" placeholder="Confirm Password" onChange={e => setConfirmPassword(e.target.value)}/>
