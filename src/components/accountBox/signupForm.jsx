@@ -78,8 +78,9 @@ export function SignupForm(props) {
           console.log();
           snkbr.current.openSnackbar(message);
         });
-
-      if (!res.data.success) return snkbr.current.openSnackbar(res.data.message);
+        
+        if(!res) return
+        if (!res.data.success) return snkbr.current.openSnackbar(res.data.message);
 
       window.localStorage.setItem('token', token)
       snkbr.current.openSnackbar(res.data.message);
