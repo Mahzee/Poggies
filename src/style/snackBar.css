@@ -24,11 +24,13 @@
     left: 50%;
     right: auto;
     transform: translateX(-50%);
+    /* transition: all 2000ms ease-in-out; */
   }
 }
 @media screen and (min-width: 600px) {
   .MuiSnackbarContent-root {
     flex-grow: initial;
     min-width: 260px !important;
+   /*  transition: all 200ms ease-in-out; */
   }
 }

