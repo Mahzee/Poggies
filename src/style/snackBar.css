@@ -8,6 +8,7 @@
   background-color: #ff6565;
   flex-direction: row-reverse;
 }
+
 .ti-snackbar-root .ti-snackbarcontent-root-default .MuiSnackbarContent-message {
   flex-grow: 1;
   text-align: end;
