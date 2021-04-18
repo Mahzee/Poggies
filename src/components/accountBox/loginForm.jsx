@@ -51,12 +51,12 @@ export function LoginForm(props) {
 
     const url = "http://127.0.0.1:8000/account/login";
     const formData = new FormData();
-    formData.append("usernameoremail", email);
+    formData.append("usernameormail", email);
     formData.append("password", password);
     const config = {
       headers: {
         "content-type": "multipart/form-data",
-      },
+      }
     };
     const res = await axios.post(url, formData, config).catch((e) => {
       console.log(e);
@@ -66,9 +66,10 @@ export function LoginForm(props) {
       console.log();
       snkbr.current.openSnackbar(message);
     });
+    
 
       if (!res) return;
-      if (!res.data.success) return snkbr.current.openSnackbar(res.data.message);
+      if (!res.data.success) return snkbr.current.openSnackbar(res.data.message, 'info');
 
     window.localStorage.setItem('token', token)
     snkbr.current.openSnackbar(res.data.message);
