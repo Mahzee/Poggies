@@ -44,11 +44,9 @@ export const Input = styled.input`
   &::placeholder {
     color: #c4c4c4;
   }
-
   &:not(:last-of-type) {
     border-bottom: 1.5px solid rgba(200, 200, 200, 0.8);
   }
-
   &:focus {
     outline: none;
     border-bottom: 2px solid rgba(0, 115, 255, 1);
