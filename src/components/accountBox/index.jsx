@@ -7,7 +7,9 @@ import { AccountContext } from "./accountContext";
 
 const BoxContainer = styled.div`
   width: 280px;
-  min-height: 550px;
+  /* padding-right: 10px; */
+  max-height: 635px;
+  min-height: 635px;
   display: flex;
   flex-direction: column;
   border-radius: 19px;
@@ -35,7 +37,7 @@ const BackDrop = styled(motion.div)`
   flex-direction: column;
   border-radius: 50%;
   transform: rotate(60deg);
-  top: -290px;
+  top: -210px;
   left: -70px;
   background: rgb(3,0,36);
   background: linear-gradient(
@@ -71,15 +73,16 @@ const SmallText = styled.h5`
 `;
 
 const InnerContainer = styled.div`
-  width: 100%;
+  width: 218px;
   display: flex;
   flex-direction: column;
-  padding: 0 1.8em;
+  margin-top: 70px;
+  margin-left: 35px;
 `;
 
 const backdropVariants = {
   expanded: {
-    width: "300%",
+    width: "400%",
     height: "1170px",
     borderRadius: "20%",
     transform: "rotate(60deg)",
