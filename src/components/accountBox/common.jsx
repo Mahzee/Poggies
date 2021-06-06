@@ -6,18 +6,19 @@ export const BoxContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
+
 `;
 
 export const FormContainer = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 0px 2.5px rgba(15, 15, 15, 0.19);
+  box-shadow: 0px 1px 2.5px rgba(15, 15, 15, 0.19);
 `;
 
 export const MutedLink = styled.a`
   font-size: 11px;
-  color: rgba(180, 180, 180, 0.8);
+  color: rgba(172, 172, 172, 0.8);
   font-weight: 500;
   text-decoration: none;
 `;
@@ -37,8 +38,10 @@ export const Input = styled.input`
   border: 1px solid rgba(200, 200, 200, 0.3);
   padding: 0px 10px;
   border-bottom: 1.4px solid transparent;
+  box-shadow: 0px 2px 8px rgba(15, 15, 15, 0.19);
   transition: all 200ms ease-in-out;
   font-size: 12px;
+  margin-left: -11px;
 
   &::placeholder {
     color: #c4c4c4;
@@ -64,14 +67,21 @@ export const SubmitButton = styled.button`
   border: none;
   border-radius: 100px 100px 100px 100px;
   cursor: pointer;
+  box-shadow: 0px 8px 10px rgba(15, 15, 15, 0.19);
   transition: all, 240ms ease-in-out;
-  background: rgb(3,0,36);
+  background: rgb(3, 0, 36);
   background: linear-gradient(
     70deg,
-     rgba(97,9,121,1) 18%, 
-     rgba(0,115,255,1) 100%
-    );
+    rgba(97, 9, 121, 1) 18%,
+    rgba(0, 115, 255, 1) 100%
+  );
+
+  &:focus {
+    outline: none;
+  }
   &:hover {
     filter: brightness(1.2);
+    outline: none;
+    border: none;
   }
 `;
