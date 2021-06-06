@@ -9,22 +9,18 @@ import {
   MutedLink,
   SubmitButton,
 } from "./common";
+import Loading from '../../Loading'
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 import SnackBar  from "./SnackBar"; 
 import axios from "axios";
-
+import {Redirect} from 'react-router-dom'
 export function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
   const snkbr = useRef();
   const [password, setPassword] = useState(0);
   const [email, setEmail] = useState('');
-
-  function validateEmailAddress (emailAddress) {
-  var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-  if (!pattern.test(emailAddress)) return false
-  else return true
-  }
+  const [loading , setLoading] = useState(false) 
 
   async function login (){
     var token = "";
@@ -43,37 +39,38 @@ export function LoginForm(props) {
         "Password should have less than 8 character",
         "error"
       );
-    if (validateEmailAddress(email) === false)
-      return snkbr.current.openSnackbar(
-        "This email address is wrong",
-        "error"
-      );
+    
 
-    const url = "http://127.0.0.1:8000/account/login";
-    const formData = new FormData();
-    formData.append("usernameormail", email);
-    formData.append("password", password);
+    const url = "http://pazapp.ir/account/login";
+      const formData = new FormData();
+      formData.append("usernameormail", email);
+      formData.append("password", password);
     const config = {
       headers: {
         "content-type": "multipart/form-data",
       }
     };
-    const res = await axios.post(url, formData, config).catch((e) => {
-      console.log(e);
-      const message =
-        (e.response && e.response.data && e.response.data.message) ||
-        "somthing is wrong";
-      console.log();
-      snkbr.current.openSnackbar(message);
-    });
+    setLoading(true);
     
+    axios.post(url,formData , config).then(res=>{
+      if(res.data.status == 'success'){
+      document.cookie = `Authorization=${res.data.token}`
+      snkbr.current.openSnackbar(res.data.message , 'hi');
+      console.log("loged in");
+      setLoading(false);
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 2000);
+       if (!res.data.success) return snkbr.current.openSnackbar( 'welcome ' , 'info');
+      }
+      else{
+        setLoading(false);
+        if (!res.data.success) return snkbr.current.openSnackbar( res.data.message ,'error');
+      }
+    })
+      
 
-      if (!res) return;
-      if (!res.data.success) return snkbr.current.openSnackbar(res.data.message, 'info');
-
-    window.localStorage.setItem('token', token)
-    snkbr.current.openSnackbar(res.data.message);
-    console.log("loged in");
+    
   }
 
   return (
@@ -82,7 +79,7 @@ export function LoginForm(props) {
       <FormContainer>
         <Input
           type="email"
-          placeholder="Email"
+          placeholder="Username"
           onChange={(e) => setEmail(e.target.value)}
         />
         <Input
@@ -94,8 +91,8 @@ export function LoginForm(props) {
       <Marginer direction="vertical" margin={12} />
       <MutedLink href="#">Forget your password?</MutedLink>
       <Marginer direction="vertical" margin="1.5em" />
-      <SubmitButton type="submit" onClick={login}>
-        Sign in
+      <SubmitButton type="submit" onClick={login} disabled={loading}>
+        {loading ? <Loading /> : 'Sign in'}
       </SubmitButton>
       <Marginer direction="vertical" margin="1em" />
       <MutedLink>
