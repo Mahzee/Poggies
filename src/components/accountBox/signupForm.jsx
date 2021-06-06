@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { useState } from "react";
 import { useRef } from "react";
-
 import {
   BoldLink,
   BoxContainer,
@@ -10,7 +9,7 @@ import {
   MutedLink,
   SubmitButton,
 } from "./common";
-
+import Loading from '../../Loading'
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 import SnackBar from "./SnackBar";
@@ -23,6 +22,7 @@ export function SignupForm(props) {
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState(0);
+  const [loading , setLoading] = useState(false) 
 
   async function signup() {
     var token = "";
@@ -56,8 +56,8 @@ export function SignupForm(props) {
       );
     if (validateEmailAddress(email) === false)
       return snkbr.current.openSnackbar("This email address is wrong", "error");
-
-    const url = "http://127.0.0.1:8000/account/signup";
+        setLoading(true);
+    const url = "http://pazapp.ir/account/signup";
     const formData = new FormData();
     formData.append("username", fullName);
     formData.append("email", email);
@@ -73,9 +73,12 @@ export function SignupForm(props) {
       const message =
         (e.response && e.response.data && e.response.data.message) ||
         "somthing is wrong";
+                setLoading(false);
+
       console.log();
       snkbr.current.openSnackbar(message);
     });
+    setLoading(false);
 
     if (!res) return;
     if (!res.data.success) {
@@ -83,7 +86,7 @@ export function SignupForm(props) {
       return snkbr.current.openSnackbar(res.data.message, 'info');
     }
 
-    window.localStorage.setItem("token", token);
+    
   
     snkbr.current.openSnackbar(res.data.message);
     console.log("signed up");
@@ -123,13 +126,13 @@ export function SignupForm(props) {
       </FormContainer>
       <Marginer direction="vertical" margin={16} />
       <SubmitButton type="submit" onClick={signup}>
-        Sign Up
+      {loading ? <Loading /> : 'Sign in'}
       </SubmitButton>
       <Marginer direction="vertical" margin="1em" />
       <MutedLink>
         Already have an account?
         <BoldLink href="#" onClick={switchToSignin}>
-          Sign in
+          Sign Up
         </BoldLink>
       </MutedLink>
     </BoxContainer>
