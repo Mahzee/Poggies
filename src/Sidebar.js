@@ -26,6 +26,7 @@ function Sidebar({ myId }) {
       <h2 className="poggies">POGGIES...!</h2>
 
       <Link to="/">
+        {/* <HomeIcon fontSize="large"/> */}
         <SidebarOption Icon={HomeIcon} text="Home" />
       </Link>
       <Link to={`/user/${ID}`}>
@@ -34,8 +35,12 @@ function Sidebar({ myId }) {
       <Link to="/search">
         <SidebarOption Icon={SearchIcon} text="Explore" />
       </Link>
-      <SidebarOption Icon={MailOutlineIcon} text="Messages" />
-      <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" />
+      <SidebarOption Icon={MailOutlineIcon} text="Messages" fontSize="large" />
+      <SidebarOption
+        Icon={NotificationsNoneIcon}
+        text="Notifications"
+        fontSize="large"
+      />
       <SidebarOption Icon={BookmarkBorderIcon} text="Bookmarks" />
       <SidebarOption Icon={ListAltIcon} text="Lists" />
       <SidebarOption Icon={MoreHorizIcon} text="More" />

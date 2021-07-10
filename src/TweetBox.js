@@ -34,14 +34,15 @@ function TweetBox() {
             type="text"
           ></input> */}
         <div className="tweetBox_footer">
-          <CropOriginalIcon />
-          <SentimentVerySatisfiedIcon />
-          <EventIcon />
-          <LocationOnIcon />
-          <GifIcon />
+          <CropOriginalIcon style={{ fontSize: "20px" }} />
+          <SentimentVerySatisfiedIcon style={{ fontSize: "20px" }} />
+          <EventIcon style={{ fontSize: "20px" }} />
+          <LocationOnIcon style={{ fontSize: "20px" }} />
+          <GifIcon style={{ fontSize: "20px" }} />
         </div>
         <Button
           className="tweetBox_tweetButton"
+          style={{ fontSize: "15px" }}
           onClick={() => {
             let url = "http://pazapp.ir/Post/Posts";
             const formData = new FormData();

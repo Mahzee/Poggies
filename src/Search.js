@@ -14,23 +14,14 @@ import { Link } from "react-router-dom";
 import Loading from "./Loading";
 
 const Search = (props) => {
-  const [type, setType] = useState("account");
+  const [type, setType] = useState(null);
   const [keyword, setKeyword] = useState("");
-  const [numinpages, setNuminpages] = useState(null);
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [pages, setPages] = useState([]);
   const [limit, setLimit] = useState(1);
   const submitHandler = (pagenumber, init) => {
     setLoading(true);
-    
-    // Check Arguments
-    console.log("keyword" + " " + keyword)
-    console.log("type" + " " + type)
-    console.log("pagenumber" + " " + pagenumber)
-    console.log("limit" + " " + limit)
-    // 
-
     const url = "http://pazapp.ir/account/search";
     const formData = new FormData();
     formData.append("serachfield", keyword);
@@ -64,48 +55,52 @@ const Search = (props) => {
     <>
       <Sidebar myId={props.me.id} />
       <div className="container">
-        <div className="HeadSearch">
-          <Form>
-            <div className="searcher">
-              <input type="text" placeholder="search"
+        <div>
+          <Form inline className="items_container">
+            <SearchIcon className="widgets_searchIcon" />
+            <InputGroup className="mb-2-mr-sm-2">
+              <FormControl
+                id="keyword"
                 onChange={(e) => {
                   setKeyword(e.target.value);
-                }} />
-            </div>
-            <div className="filter">
-              <div className="tabs">
-                <div className={`tab ${type === 'account' ? 'active' : ''}`} onClick={() => setType('account')}>
-                  <span>
-                    account
-                  </span>
-                </div>
-                <div className={`tab ${type === 'post' ? 'active' : ''}`} onClick={() => setType('post')}>
-                  <span>
-                    post
-                  </span>
-                </div>
-                <div className={`tab ${type === 'hashtag' ? 'active' : ''}`} onClick={() => setType('hashtag')}>
-                  <span>
-                    hashtag
-                  </span>
-                </div>
-              </div>
-              <div className="action">
-                <input type="text" placeholder="num in pages" className="nums"
-                  onChange={(e) => {
-                    setNuminpages(e.target.value);
-                  }}
-                />
-                <Button
-                  className="submit"
-                  onClick={() => {
-                    submitHandler(numinpages, false);
-                  }}
-                >
-                  search
-                </Button>
-              </div>
-            </div>
+                }}
+                placeholder="keyword"
+              />
+            </InputGroup>
+
+            <Form.Control
+              as="select"
+              className="mr-sm-2"
+              id="inlineFormCustomSelect"
+              custom
+              onChange={(e) => {
+                setType(e.target.value);
+                console.log(type);
+              }}
+            >
+              <option value="none">Choose type</option>
+              <option value="user">user</option>
+              <option value="hashtag">hashtag</option>
+              <option value="post">post</option>
+            </Form.Control>
+            <input
+              type="number"
+              style={{ width: "100px", marginRight: "2em" }}
+              placeholder="num in a page"
+              max="10"
+              min="1"
+              onChange={(e) => {
+                setLimit(e.target.value);
+              }}
+            />
+            <Button
+              className="mb-2"
+              onClick={() => {
+                submitHandler(1, true);
+              }}
+            >
+              Search
+            </Button>
           </Form>
         </div>
 

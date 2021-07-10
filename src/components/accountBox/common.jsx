@@ -6,7 +6,6 @@ export const BoxContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
-
 `;
 
 export const FormContainer = styled.form`
@@ -32,7 +31,7 @@ export const BoldLink = styled.a`
 `;
 
 export const Input = styled.input`
-  width: 100%;
+  width: 106%;
   height: 42px;
   outline: none;
   border: 1px solid rgba(200, 200, 200, 0.3);
@@ -46,9 +45,11 @@ export const Input = styled.input`
   &::placeholder {
     color: #c4c4c4;
   }
+
   &:not(:last-of-type) {
     border-bottom: 1.5px solid rgba(200, 200, 200, 0.8);
   }
+
   &:focus {
     outline: none;
     border-bottom: 2px solid rgba(0, 115, 255, 1);

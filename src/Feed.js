@@ -5,31 +5,47 @@ import "./Feed.css";
 import axios from "axios";
 import Widgets from "./Widgets";
 import Sidebar from "./Sidebar";
+import { useState, useEffect } from "react";
+import Loading from "./Loading";
 
-class Feed extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { listOfPosts: [] };
-  }
-
-  render() {
-    return (
-      <>
-        <Sidebar myId={this.props.myId} />
-        <div className="feed">
-          <div className="feed_header">
-            <h2>Home</h2>
-          </div>
-          <TweetBox />
-          {this.state.listOfPosts.map((post, index) => (
-            <Post text={post.message} displayName={post.UserName} key={index} />
-          ))}
-          {console.log(this.state.listOfPosts)}
+const Feed = (props) => {
+  const [posts, postsHandler] = useState([]);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    const url = "http://pazapp.ir/RecommendPost/SendRecomPost";
+    const config = { headers: { Authorization: document.cookie.slice(14) } };
+    axios.get(url, config).then((res) => {
+      console.log(res.data);
+      postsHandler(res.data);
+      setLoading(false);
+    });
+  }, []);
+  return (
+    <>
+      <Sidebar myId={props.myId} />
+      <div className="feed">
+        <div className="feed_header">
+          <h2>Home</h2>
         </div>
-        <Widgets />
-      </>
-    );
-  }
-}
+        <TweetBox />
+        {loading ? (
+          <Loading />
+        ) : (
+          posts.map((item, index) => (
+            <Post
+              text={item[0].message}
+              username={item[0].UserName}
+              key={index}
+              image={item.image}
+              postId={item[0].postId}
+            />
+          ))
+        )}
+      </div>
+      <Widgets />
+    </>
+  );
+};
 
 export default Feed;

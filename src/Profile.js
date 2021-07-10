@@ -39,6 +39,7 @@ const Profile = (props) => {
         let postsUrl = `http://pazapp.ir/Post/Posts?UserName=${user.username}`;
         axios.get(postsUrl, config).then((res) => {
           postsHandler((posts = res.data));
+          // console.log(posts);
         });
         setLoading(false);
       });
@@ -118,9 +119,9 @@ const Profile = (props) => {
                   username={item.UserName}
                   key={index}
                   image={item.image}
+                  postId={item.postId}
                 />
               ))}
-              {/* <Post text={"post.message"} displayName={"post.UserName"} key={2} /> */}
             </div>
           </>
         )}

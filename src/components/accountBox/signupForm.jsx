@@ -83,7 +83,7 @@ export function SignupForm(props) {
     if (!res) return;
     if (!res.data.success) {
       console.log("okaye");
-      return snkbr.current.openSnackbar(res.data.message,'info  ');
+      return snkbr.current.openSnackbar(res.data.message, 'info');
     }
 
     
